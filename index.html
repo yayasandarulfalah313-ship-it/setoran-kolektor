@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setoran Kolektor - Yayasan Darulfalah 313</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen font-sans">
+    <div class="max-w-4xl mx-auto p-4">
+        <header class="bg-blue-800 text-white p-6 rounded-t-lg shadow-md text-center">
+            <h1 class="text-2xl font-bold"><i class="fas fa-school mr-2"></i>Setoran Kolektor</h1>
+            <p class="text-sm opacity-90">Yayasan Darulfalah 313</p>
+        </header>
+
+        <!-- Tab Navigation -->
+        <div class="flex bg-white shadow-md rounded-b-lg mb-6">
+            <button onclick="switchTab('admin')" id="tab-admin" class="flex-1 py-4 px-6 text-center font-semibold bg-blue-100 text-blue-800 border-b-4 border-blue-800 transition">
+                <i class="fas fa-user-shield mr-2"></i>Admin (Input Data)
+            </button>
+            <button onclick="switchTab('user')" id="tab-user" class="flex-1 py-4 px-6 text-center font-semibold text-gray-600 hover:bg-gray-50 transition">
+                <i class="fas fa-money-bill-wave mr-2"></i>User (Input Setoran)
+            </button>
+        </div>
+
+        <!-- ADMIN FORM -->
+        <div id="form-admin" class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-xl font-bold mb-4 text-gray-800 border-b pb-2">Input Data Siswa & Kolektor</h2>
+            <form id="adminForm" class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Nama Kolektor</label>
+                        <input type="text" name="namaKolektor" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Nama Siswa</label>
+                        <input type="text" name="namaSiswa" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Kelas</label>
+                        <input type="text" name="kelas" placeholder="Contoh: 10A" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Tingkatan</label>
+                        <select name="tingkatan" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border focus:ring-blue-500 focus:border-blue-500">
+                            <option value="">Pilih Tingkatan</option>
+                            <option value="MA">MA</option>
+                            <option value="MTs">MTs</option>
+                            <option value="SMP">SMP</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Tahun Pelajaran</label>
+                        <input type="text" name="tahunPelajaran" placeholder="2026/2027" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Semester</label>
+                        <select name="semester" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border focus:ring-blue-500 focus:border-blue-500">
+                            <option value="Ganjil">Ganjil</option>
+                            <option value="Genap">Genap</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Keterangan</label>
+                    <textarea name="keterangan" rows="2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border focus:ring-blue-500 focus:border-blue-500"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-blue-800 text-white py-2 px-4 rounded-md hover:bg-blue-900 transition font-semibold">
+                    <i class="fas fa-save mr-2"></i>Simpan Data Awal
+                </button>
+            </form>
+        </div>
+
+        <!-- USER FORM -->
+        <div id="form-user" class="bg-white p-6 rounded-lg shadow-md hidden">
+            <h2 class="text-xl font-bold mb-4 text-gray-800 border-b pb-2">Input Pembayaran Setoran</h2>
+            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-4">
+                <p class="text-sm text-yellow-800">
+                    <i class="fas fa-info-circle mr-1"></i> 
+                    <strong>Info Tunggakan:</strong> Kewajiban SWPS Rp 300.000/bulan, Catering Rp 150.000/bulan. 
+                    Sistem akan otomatis menghitung sisa tunggakan di Spreadsheet saat pelunasan diisi.
+                </p>
+            </div>
+            <form id="userForm" class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Nama Kolektor</label>
+                        <input type="text" name="namaKolektor" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border focus:ring-green-500 focus:border-green-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Nama Siswa</label>
+                        <input type="text" name="namaSiswa" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border focus:ring-green-500 focus:border-green-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Kelas</label>
+                        <input type="text" name="kelas" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border focus:ring-green-500 focus:border-green-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Tingkatan</label>
+                        <select name="tingkatan" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border focus:ring-green-500 focus:border-green-500">
+                            <option value="">Pilih Tingkatan</option>
+                            <option value="MA">MA</option>
+                            <option value="MTs">MTs</option>
+                            <option value="SMP">SMP</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Tahun Pelajaran</label>
+                        <input type="text" name="tahunPelajaran" placeholder="2026/2027" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border focus:ring-green-500 focus:border-green-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Semester</label>
+                        <select name="semester" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border focus:ring-green-500 focus:border-green-500">
+                            <option value="Ganjil">Ganjil</option>
+                            <option value="Genap">Genap</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Bulan Bayar</label>
+                        <select name="bulanBayar" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border focus:ring-green-500 focus:border-green-500">
+                            <option value="Januari">Januari</option>
+                            <option value="Februari">Februari</option>
+                            <option value="Maret">Maret</option>
+                            <option value="April">April</option>
+                            <option value="Mei">Mei</option>
+                            <option value="Juni">Juni</option>
+                            <option value="Juli">Juli</option>
+                            <option value="Agustus">Agustus</option>
+                            <option value="September">September</option>
+                            <option value="Oktober">Oktober</option>
+                            <option value="November">November</option>
+                            <option value="Desember">Desember</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Tanggal Bayar</label>
+                        <input type="date" name="tanggalBayar" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border focus:ring-green-500 focus:border-green-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Nominal Bayar SWPS (Rp)</label>
+                        <input type="number" name="nominalSWPS" placeholder="Contoh: 300000" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border focus:ring-green-500 focus:border-green-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Nominal Bayar Catering (Rp)</label>
+                        <input type="number" name="nominalCatering" placeholder="Contoh: 150000" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border focus:ring-green-500 focus:border-green-500">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Keterangan</label>
+                    <textarea name="keterangan" rows="2" placeholder="Contoh: Pelunasan bulan Januari" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border focus:ring-green-500 focus:border-green-500"></textarea>
+                </div>
+                <button type="submit" id="btnSubmitUser" class="w-full bg-green-700 text-white py-3 px-4 rounded-md hover:bg-green-800 transition font-semibold">
+                    <i class="fas fa-paper-plane mr-2"></i>Kirim Data Setoran
+                </button>
+            </form>
+        </div>
+
+        <!-- Loading Overlay -->
+        <div id="loading" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
+            <div class="bg-white p-6 rounded-lg shadow-xl text-center">
+                <i class="fas fa-spinner fa-spin text-4xl text-blue-800 mb-3"></i>
+                <p class="text-gray-700 font-semibold">Menyimpan data ke Spreadsheet...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ⚠️ GANTI URL DI BAWAH INI DENGAN URL WEB APP DARI LANGKAH 2
+        const https://script.google.com/macros/s/AKfycbxyzxPXOuJC7A8MhJhdHNTNFi0YTpDWf-5CfZSvztfvKAsNwD_VNlxlW_Zp7vMRVWwLeg/exec;
+
+        function switchTab(tab) {
+            const adminForm = document.getElementById('form-admin');
+            const userForm = document.getElementById('form-user');
+            const tabAdmin = document.getElementById('tab-admin');
+            const tabUser = document.getElementById('tab-user');
+
+            if (tab === 'admin') {
+                adminForm.classList.remove('hidden');
+                userForm.classList.add('hidden');
+                tabAdmin.classList.add('bg-blue-100', 'text-blue-800', 'border-b-4', 'border-blue-800');
+                tabAdmin.classList.remove('text-gray-600', 'hover:bg-gray-50');
+                tabUser.classList.remove('bg-blue-100', 'text-blue-800', 'border-b-4', 'border-blue-800');
+                tabUser.classList.add('text-gray-600', 'hover:bg-gray-50');
+            } else {
+                adminForm.classList.add('hidden');
+                userForm.classList.remove('hidden');
+                tabUser.classList.add('bg-blue-100', 'text-blue-800', 'border-b-4', 'border-blue-800');
+                tabUser.classList.remove('text-gray-600', 'hover:bg-gray-50');
+                tabAdmin.classList.remove('bg-blue-100', 'text-blue-800', 'border-b-4', 'border-blue-800');
+                tabAdmin.classList.add('text-gray-600', 'hover:bg-gray-50');
+            }
+        }
+
+        function handleFormSubmit(event, formId) {
+            event.preventDefault();
+            const form = document.getElementById(formId);
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            document.getElementById('loading').classList.remove('hidden');
+
+            fetch(WEB_APP_URL, {
+                method: 'POST',
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                document.getElementById('loading').classList.add('hidden');
+                if (result.status === 'success') {
+                    alert('✅ Data berhasil disimpan ke Spreadsheet!');
+                    form.reset();
+                } else {
+                    alert('❌ Error: ' + result.message);
+                }
+            })
+            .catch(error => {
+                document.getElementById('loading').classList.add('hidden');
+                alert('❌ Terjadi kesalahan jaringan: ' + error);
+            });
+        }
+
+        document.getElementById('adminForm').addEventListener('submit', (e) => handleFormSubmit(e, 'adminForm'));
+        document.getElementById('userForm').addEventListener('submit', (e) => handleFormSubmit(e, 'userForm'));
+    </script>
+</body>
+</html>
